@@ -19,11 +19,15 @@ app.post('/todos', (req, res) => {
     });
 
     newTodo.save().then((r) => {
-        res.send(r);
+        res.status(200).send(r);
     }, (e) => {
-        res.send(e);
+        res.status(400).send(e);
     });
 });
+
+// Todo.find().then((todos) => {
+//     console.log(todos);
+// });
 
 
 
@@ -33,5 +37,7 @@ app.listen(3000, () => {
     console.log('Starting the app');
 });
 
+
+module.exports = {app};
 
 
