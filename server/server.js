@@ -53,13 +53,13 @@ app.get('/todos/:id', (req, res) => {
     Todo.findById(id).then((todo) => {
 
         if(!todo){
-            return res.status(404).send('ID Not Found');
+            return res.status(404).send();
         }
 
-        res.status(200).send(JSON.stringify(todo, undefined, 4));
+        res.status(200).send({todo});
 
     }, (e) => {
-        res.status(404).send('ID Not Found');
+        res.status(404).send();
     })
 
 });
