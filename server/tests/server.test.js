@@ -134,4 +134,29 @@ describe('GET /todos/id', (done) => {
 
 
 
+describe('DELETE /todos', (done) => {
+
+    it('should detele the todo', (done) => {
+
+        var hexId = todos[1]._id.toHexString();
+
+        request(app)
+            .delete(`/todos/${hexId}`)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.todo._id).toBe(hexId);
+            })
+            .end(done);
+
+    });
+
+
+    
+
+});
+
+
+
+
+
 
