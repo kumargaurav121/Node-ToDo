@@ -1,4 +1,5 @@
 
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
@@ -94,6 +95,32 @@ userSchema.pre('save', function(next) {
         next();
     }
 });
+
+
+userSchema.statics.findByCredential = function(email, password) {
+
+    var User = this;
+
+    return User.findOne({email}).then((user) => {
+
+        if(!user){
+            return Promise.reject();
+        }
+
+        return new Promise((resolve, reject) => {
+            var pass = user.password;
+            bcrypt.compare(password, pass, (err, res) => {
+                if(res){
+                    resolve(user);
+                } else {
+                    reject();
+                }
+            })
+        })
+       
+    })
+
+};
 
 
 
